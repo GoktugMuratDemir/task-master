@@ -20,8 +20,12 @@ export const SideBarList: React.FC = () => {
       to: "/categorie/home",
     },
     {
-      name: "Shopping List",
-      to: "/categorie/shopping-list",
+      name: "Work",
+      to: "/categorie/work",
+    },
+    {
+      name: "Personal",
+      to: "/categorie/personal",
     },
     // Diğer kategorileri buraya ekleyebilirsiniz
   ];

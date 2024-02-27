@@ -5,8 +5,9 @@ import { Home } from "../Pages/Home";
 import { DetailPage } from "../Pages/Detail";
 import { NotFound404 } from "../Pages/NotFound404";
 import { None } from "../Pages/Categories/None";
+import { WorkCategoriePage } from "../Pages/Categories/Work";
 import { HomeCategoriePage } from "../Pages/Categories/Home";
-import { ShoppingList } from "../Pages/Categories/Shopping-List";
+import { PersonalCategoriePage } from "../Pages/Categories/Personal";
 
 
 
@@ -40,8 +41,12 @@ const routes = createBrowserRouter([
             element : <HomeCategoriePage />,
           },
           {
-            path: "/categorie/shopping-list",
-            element : <ShoppingList />,
+            path: "/categorie/work",
+            element : <WorkCategoriePage />,
+          },
+          {
+            path: "/categorie/personal",
+            element : <PersonalCategoriePage />,
           }
         ],
       },
