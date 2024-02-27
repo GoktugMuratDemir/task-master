@@ -4,12 +4,10 @@ import { LayoutMain } from "../Layouts/Main";
 import { Home } from "../Pages/Home";
 import { DetailPage } from "../Pages/Detail";
 import { NotFound404 } from "../Pages/NotFound404";
-import { None } from "../Pages/Categories/None";
+
 import { WorkCategoriePage } from "../Pages/Categories/Work";
 import { HomeCategoriePage } from "../Pages/Categories/Home";
 import { PersonalCategoriePage } from "../Pages/Categories/Personal";
-
-
 
 const routes = createBrowserRouter([
   {
@@ -32,25 +30,22 @@ const routes = createBrowserRouter([
             path: "/detail/:id",
             element: <DetailPage />,
           },
-          {
-            path: "/categorie/none",
-            element : <None />,
-          },
+
           {
             path: "/categorie/home",
-            element : <HomeCategoriePage />,
+            element: <HomeCategoriePage />,
           },
           {
             path: "/categorie/work",
-            element : <WorkCategoriePage />,
+            element: <WorkCategoriePage />,
           },
           {
             path: "/categorie/personal",
-            element : <PersonalCategoriePage />,
-          }
+            element: <PersonalCategoriePage />,
+          },
         ],
       },
-      
+
       {
         path: "*",
         element: <NotFound404 />,

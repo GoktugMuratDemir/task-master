@@ -12,10 +12,6 @@ export const SideBarList: React.FC = () => {
 
   const categories: Category[] = [
     {
-      name: "None",
-      to: "/categorie/none",
-    },
-    {
       name: "Home",
       to: "/categorie/home",
     },
@@ -36,7 +32,12 @@ export const SideBarList: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="cursor-pointer" onClick={() => handleSubCategoryClick('/')}>All Types</div>
+      <div
+        className="cursor-pointer"
+        onClick={() => handleSubCategoryClick("/")}
+      >
+        All Types
+      </div>
       <div
         className="cursor-pointer"
         onClick={() => setOpenCategory(!openCategory)}

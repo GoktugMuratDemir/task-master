@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { TaskListType, TaskProps } from "./TaskType";
 
 interface ChildrenProps {
@@ -10,7 +10,7 @@ export const TaskListContext = createContext<TaskListType | null>(null);
 export const TaskListContextProvider: React.FC<ChildrenProps> = ({
   children,
 }) => {
-  const [taskList, setTaskList] = useState<TaskProps[]>([
+  const [taskList, setTaskList] = useState<Array<TaskProps>>([
     {
       id: 1,
       title: "Task 1",
@@ -83,16 +83,36 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
     },
   ]);
 
-  const changeStatus = (taskId: number) => {
+  const [filterTaskList, setFilterTaskList] = useState<TaskProps[]>([]);
+
+  useEffect(() => {
+    setFilterTaskList(taskList);
+  }, [taskList]);
+
+  const changeStatus = (id: number) => {
     setTaskList((prevTaskList) =>
       prevTaskList.map((task) =>
-        task.id === taskId ? { ...task, done: !task.done } : task
+        task.id === id ? { ...task, done: !task.done } : task
       )
     );
   };
 
+  const filterTasksByStatus = (isDone: boolean) => {
+    const updatedArray =  taskList.filter((task) => task.done === isDone);
+    setFilterTaskList(updatedArray)
+  };
+
   return (
-    <TaskListContext.Provider value={{ taskList, setTaskList, changeStatus }}>
+    <TaskListContext.Provider
+      value={{
+        taskList,
+        filterTaskList,
+        setTaskList,
+        changeStatus,
+        filterTasksByStatus,
+        setFilterTaskList
+      }}
+    >
       {children}
     </TaskListContext.Provider>
   );

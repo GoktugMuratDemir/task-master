@@ -7,12 +7,12 @@ import { TaskListType } from "../Context/TaskType";
 import Pagination from "../Components/Pagination";
 
 export const Home: React.FC = () => {
-  const { taskList } = useContext(TaskListContext) as TaskListType;
+  const { filterTaskList } = useContext(TaskListContext) as TaskListType;
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 3;
+  const itemsPerPage = 4;
 
-  const totalPages = Math.ceil(taskList.length / itemsPerPage);
+  const totalPages = Math.ceil(filterTaskList.length / itemsPerPage);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -21,7 +21,7 @@ export const Home: React.FC = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  const displayedTasks = taskList.slice(startIndex, endIndex);
+  const displayedTasks = filterTaskList.slice(startIndex, endIndex);
 
   return (
     <div className="flex flex-col gap-10">
