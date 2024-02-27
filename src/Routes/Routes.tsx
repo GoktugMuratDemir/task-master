@@ -4,6 +4,10 @@ import { LayoutMain } from "../Layouts/Main";
 import { Home } from "../Pages/Home";
 import { DetailPage } from "../Pages/Detail";
 import { NotFound404 } from "../Pages/NotFound404";
+import { None } from "../Pages/Categories/None";
+import { HomeCategoriePage } from "../Pages/Categories/Home";
+import { ShoppingList } from "../Pages/Categories/Shopping-List";
+
 
 
 const routes = createBrowserRouter([
@@ -27,8 +31,21 @@ const routes = createBrowserRouter([
             path: "/detail/:id",
             element: <DetailPage />,
           },
+          {
+            path: "/categorie/none",
+            element : <None />,
+          },
+          {
+            path: "/categorie/home",
+            element : <HomeCategoriePage />,
+          },
+          {
+            path: "/categorie/shopping-list",
+            element : <ShoppingList />,
+          }
         ],
       },
+      
       {
         path: "*",
         element: <NotFound404 />,
