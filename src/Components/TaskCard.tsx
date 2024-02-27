@@ -1,20 +1,26 @@
-import React from "react";
-import { TaskProps } from "../Context/TaskType";
+import React, { useContext } from "react";
+import { TaskListType, TaskProps } from "../Context/TaskType";
+import { TaskListContext } from "../Context/TaskListContext";
 
 interface TaskCardProps {
   task: TaskProps;
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
+  const { changeStatus } = useContext(TaskListContext) as TaskListType;
+
   return (
     <div className="bg-white rounded grid grid-cols-12 items-center py-4 divide-x-1">
       <div className="col-span-2 border-r-2">
         <div className="flex justify-center">
-          <div className="w-6 h-6 border-2 border-purple-600 rounded-full flex items-center justify-center cursor-pointer">
+          <button
+            onClick={() => changeStatus(task.id)}
+            className="w-6 h-6 border-2 border-purple-600 rounded-full flex items-center justify-center cursor-pointer"
+          >
             {task.done && (
               <div className="w-4 h-4 bg-purple-600 rounded-full"></div>
             )}
-          </div>
+          </button>
         </div>
       </div>
       <div className="col-span-8 px-8">

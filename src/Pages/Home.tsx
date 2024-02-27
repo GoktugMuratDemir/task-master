@@ -1,26 +1,44 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { HeaderTitle } from "../Components/HeaderTitle";
 import { FilterBar } from "../Components/FilterBar";
 import TaskCard from "../Components/TaskCard";
 import { TaskListContext } from "../Context/TaskListContext";
 import { TaskListType } from "../Context/TaskType";
+import Pagination from "../Components/Pagination";
 
 export const Home: React.FC = () => {
   const { taskList } = useContext(TaskListContext) as TaskListType;
 
-  // console.log(taskList);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 3;
+
+  const totalPages = Math.ceil(taskList.length / itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const displayedTasks = taskList.slice(startIndex, endIndex);
 
   return (
     <div className="flex flex-col gap-10">
       <HeaderTitle title="All Types" />
       <FilterBar />
+
       <div className="flex flex-col gap-2">
-        {
-          taskList.map((task,index)=>(
-            <TaskCard key={index} task={task} />
-          ))
-        }
+        {displayedTasks.map((task, index) => (
+          <TaskCard key={index} task={task} />
+        ))}
       </div>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };

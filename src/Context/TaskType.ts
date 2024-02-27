@@ -9,6 +9,7 @@ export interface TaskProps{
 export type TaskListType = {
     taskList: TaskProps[];
     setTaskList: React.Dispatch<React.SetStateAction<TaskProps[]>>;
+    changeStatus: (taskId:number) =>void;
     // doneTasks: TaskProps[];
     // notDoneTasks: TaskProps[];
     // addTask:(task: TaskProps)=>void;
