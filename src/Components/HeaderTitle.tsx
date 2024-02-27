@@ -1,11 +1,9 @@
-import React from 'react'
+import React from "react";
 
 interface HeaderTitleProps {
-    title : string
+  title: string;
 }
 
-export const HeaderTitle: React.FC<HeaderTitleProps> = ({title}) => {
-  return (
-    <div>HeaderTitle</div>
-  )
-}
+export const HeaderTitle: React.FC<HeaderTitleProps> = ({ title }) => {
+  return <div className="text-2xl text-center font-semibold">{title}</div>;
+};

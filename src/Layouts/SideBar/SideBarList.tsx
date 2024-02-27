@@ -32,7 +32,7 @@ export const SideBarList: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="cursor-pointer">All Types</div>
+      <div className="cursor-pointer" onClick={() => handleSubCategoryClick('/')}>All Types</div>
       <div
         className="cursor-pointer"
         onClick={() => setOpenCategory(!openCategory)}
