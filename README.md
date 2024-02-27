@@ -4,4 +4,4 @@ This project is a Todo application written in React with TypeScript. Tailwind CS
 
 # Live Preview
 
-You can access the live preview of the project by clicking [this link](https://front-end-case-study-1.vercel.app/).
+You can access the live preview of the project by clicking [this link](https://task-master-bay.vercel.app/).
