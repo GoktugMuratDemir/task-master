@@ -6,7 +6,7 @@ import TaskCard from "../../Components/TaskCard";
 import Pagination from "../../Components/Pagination";
 import { TaskListType } from "../../Context/TaskType";
 
-export const WorkCategoriePage = () => {
+export const WorkCategoryPage = () => {
   const { filterTaskList } = useContext(TaskListContext) as TaskListType;
 
   // CategorieEnums Work Category === 2

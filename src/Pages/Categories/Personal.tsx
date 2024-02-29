@@ -6,7 +6,7 @@ import TaskCard from "../../Components/TaskCard";
 import Pagination from "../../Components/Pagination";
 import { TaskListType } from "../../Context/TaskType";
 
-export const PersonalCategoriePage = () => {
+export const PersonalCategoryPage = () => {
   const { filterTaskList } = useContext(TaskListContext) as TaskListType;
 
   // CategorieEnums Personal Category === 3

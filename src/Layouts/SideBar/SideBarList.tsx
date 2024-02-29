@@ -13,15 +13,15 @@ export const SideBarList: React.FC = () => {
   const categories: Category[] = [
     {
       name: "Home",
-      to: "/categorie/home",
+      to: "/category/home",
     },
     {
       name: "Work",
-      to: "/categorie/work",
+      to: "/category/work",
     },
     {
       name: "Personal",
-      to: "/categorie/personal",
+      to: "/category/personal",
     },
     // Diğer kategorileri buraya ekleyebilirsiniz
   ];

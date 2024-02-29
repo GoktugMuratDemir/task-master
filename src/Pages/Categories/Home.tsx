@@ -6,7 +6,7 @@ import TaskCard from "../../Components/TaskCard";
 import Pagination from "../../Components/Pagination";
 import { TaskListType } from "../../Context/TaskType";
 
-export const HomeCategoriePage = () => {
+export const HomeCategoryPage = () => {
   const { filterTaskList } = useContext(TaskListContext) as TaskListType;
 
 
