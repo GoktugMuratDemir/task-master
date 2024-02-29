@@ -1,6 +1,7 @@
-import { CategorieEnumProp } from "./CategorieEnumType";
+import { CategoryEnumsProp } from "./CategoryEnumsType";
 
-export const CategorieEnums: CategorieEnumProp[] = [
+
+export const CategoryEnums: CategoryEnumsProp[] = [
   {
     value: 1,
     title: "Home",
