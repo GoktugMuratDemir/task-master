@@ -9,7 +9,8 @@ import { TaskListType } from "../../Context/TaskType";
 export const WorkCategoriePage = () => {
   const { filterTaskList } = useContext(TaskListContext) as TaskListType;
 
-  const homeTasks = filterTaskList.filter((task) => task.categorie === "Work");
+  // CategorieEnums Work Category === 2
+  const homeTasks = filterTaskList.filter((task) => task.categorie === 2);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 4;

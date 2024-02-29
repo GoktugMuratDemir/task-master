@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { TaskListType, TaskProps } from "../Context/TaskType";
 import { TaskListContext } from "../Context/TaskListContext";
+import { CategorieEnums } from "../Enums/CategorieEnum";
+import { CategorieEnumProp } from "../Enums/CategorieEnumType";
 
 interface TaskCardProps {
   task: TaskProps;
@@ -8,6 +10,9 @@ interface TaskCardProps {
 
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   const { changeStatus } = useContext(TaskListContext) as TaskListType;
+
+  const selectEnumCategory: CategorieEnumProp | undefined =
+    CategorieEnums.find((category) => category.value === task.categorie);
 
   return (
     <div className="bg-white rounded grid grid-cols-12 items-center py-4 divide-x-1">
@@ -26,8 +31,8 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
       <div className="col-span-8 px-8">
         <div>{task.title}</div>
         <div className="flex gap-2 items-center">
-          <div className={`bg-[${task?.color}] w-2 h-2 rounded-full`}></div>
-          <div>{task.categorie}</div>
+          <div style={{background: selectEnumCategory?.color}} className={` w-2 h-2 rounded-full`}></div>
+          <div>{selectEnumCategory?.title}</div>
         </div>
       </div>
       <div className="col-span-1 flex justify-center">

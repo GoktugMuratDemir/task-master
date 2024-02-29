@@ -2,8 +2,8 @@ export interface TaskProps{
     id:number;
     title: string;
     done:boolean;
-    categorie: string;
-    color: string;
+    categorie: number;
+    // color: string;
 };
 
 export type TaskListType = {

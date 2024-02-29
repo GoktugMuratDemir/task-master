@@ -15,71 +15,61 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
       id: 1,
       title: "Task 1",
       done: false,
-      categorie: "Work",
-      color: "#00FF00",
+      categorie: 2,
     },
     {
       id: 2,
       title: "Task 2",
       done: true,
-      categorie: "Personal",
-      color: "#C0C0C0",
+      categorie: 3,
     },
     {
       id: 3,
       title: "Task 3",
       done: false,
-      categorie: "Home",
-      color: "#00FFFF",
+      categorie: 1,
     },
     {
       id: 4,
       title: "Task 4",
       done: true,
-      categorie: "Work",
-      color: "#00FF00",
+      categorie: 2,
     },
     {
       id: 5,
       title: "Task 5",
       done: false,
-      categorie: "Personal",
-      color: "#C0C0C0",
+      categorie: 3,
     },
     {
       id: 6,
       title: "Task 6",
       done: true,
-      categorie: "Home",
-      color: "#00FFFF",
+      categorie: 1,
     },
     {
       id: 7,
       title: "Task 7",
       done: false,
-      categorie: "Work",
-      color: "#00FF00",
+      categorie: 2,
     },
     {
       id: 8,
       title: "Task 8",
       done: true,
-      categorie: "Personal",
-      color: "#C0C0C0",
+      categorie: 3,
     },
     {
       id: 9,
       title: "Task 9",
       done: false,
-      categorie: "Home",
-      color: "#00FFFF",
+      categorie: 1,
     },
     {
       id: 10,
       title: "Task 10",
       done: true,
-      categorie: "Work",
-      color: "#00FF00",
+      categorie: 2,
     },
   ]);
 
@@ -98,8 +88,8 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
   };
 
   const filterTasksByStatus = (isDone: boolean) => {
-    const updatedArray =  taskList.filter((task) => task.done === isDone);
-    setFilterTaskList(updatedArray)
+    const updatedArray = taskList.filter((task) => task.done === isDone);
+    setFilterTaskList(updatedArray);
   };
 
   return (
@@ -110,7 +100,7 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
         setTaskList,
         changeStatus,
         filterTasksByStatus,
-        setFilterTaskList
+        setFilterTaskList,
       }}
     >
       {children}
