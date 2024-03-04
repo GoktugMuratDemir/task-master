@@ -79,6 +79,10 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
     setFilterTaskList(taskList);
   }, [taskList]);
 
+  const findItemInArray = (id: number | null): TaskProps | undefined => {
+    return taskList.find((task) => task.id === id);
+  };
+
   const changeStatus = (id: number) => {
     setTaskList((prevTaskList) =>
       prevTaskList.map((task) =>
@@ -103,6 +107,18 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
     setTaskList((prevTaskList) => [...prevTaskList, newTask]);
   };
 
+  const updateTask = (id: number, title: string, category: number) => {
+    setTaskList((prevTaskList) =>
+      prevTaskList.map((task) =>
+        task.id === id ? { ...task, title, category } : task
+      )
+    );
+  };
+
+  const deleteTask = (id: number) => {
+    setTaskList((prevTaskList) => prevTaskList.filter((task) => task.id !== id));
+  };
+
   return (
     <TaskListContext.Provider
       value={{
@@ -113,6 +129,9 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
         filterTasksByStatus,
         setFilterTaskList,
         addTask,
+        findItemInArray,
+        updateTask,
+        deleteTask
       }}
     >
       {children}

@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CategoryEnums } from "../Enums/CategoryEnums";
 import { TaskListContext } from "../Context/TaskListContext";
 import { TaskListType } from "../Context/TaskType";
 
 interface AddEditTaskFormProps {
   id: number | null;
-  closeModal: () =>void
+  closeModal: () => void;
 }
 
 interface FormData {
@@ -13,8 +13,13 @@ interface FormData {
   category: number;
 }
 
-const AddEditTaskForm: React.FC<AddEditTaskFormProps> = ({ id ,closeModal}) => {
-  const { addTask } = useContext(TaskListContext) as TaskListType;
+const AddEditTaskForm: React.FC<AddEditTaskFormProps> = ({
+  id,
+  closeModal,
+}) => {
+  const { addTask, updateTask, findItemInArray } = useContext(
+    TaskListContext
+  ) as TaskListType;
 
   const [formData, setFormData] = useState<FormData>({
     title: "",
@@ -22,6 +27,18 @@ const AddEditTaskForm: React.FC<AddEditTaskFormProps> = ({ id ,closeModal}) => {
   });
 
   const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    if (id) {
+      const findedItem = findItemInArray(id);
+      if (findedItem) {
+        setFormData({
+          title: findedItem.title,
+          category: findedItem.category || 0,
+        });
+      }
+    }
+  }, [findItemInArray, id]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -42,8 +59,10 @@ const AddEditTaskForm: React.FC<AddEditTaskFormProps> = ({ id ,closeModal}) => {
     if (formData.title.trim() === "" || formData.category === 0) {
       setError("Lütfen tüm alanları doldurun.");
     } else {
-      addTask(formData.title, formData.category);
-      closeModal()
+      id
+        ? updateTask(id, formData.title, formData.category)
+        : addTask(formData.title, formData.category);
+      closeModal();
       setError("");
     }
   };
