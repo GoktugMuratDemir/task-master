@@ -11,7 +11,7 @@ export const HomeCategoryPage = () => {
 
 
   // CategorieEnums Home Category === 1
-  const homeTasks = filterTaskList.filter((task) => task.categorie === 1);
+  const homeTasks = filterTaskList.filter((task) => task.category === 1);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 4;

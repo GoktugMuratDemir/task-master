@@ -10,7 +10,7 @@ export const WorkCategoryPage = () => {
   const { filterTaskList } = useContext(TaskListContext) as TaskListType;
 
   // CategorieEnums Work Category === 2
-  const homeTasks = filterTaskList.filter((task) => task.categorie === 2);
+  const homeTasks = filterTaskList.filter((task) => task.category === 2);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 4;

@@ -33,12 +33,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
 // call this part in tsx
 
-//    <button onClick={openModal}>Open Modal</button>
-//    <CustomModal isOpen={isModalOpen} onClose={closeModal}>
-//        {/* contents add here */}
-//        <h1>Modal Content</h1>
-//        <button onClick={closeModal}>Close Modal</button>
-//    </CustomModal> 
+  //  <button onClick={openModal}>Open Modal</button>
+  //  <CustomModal isOpen={isModalOpen} onClose={closeModal}>
+  //      {/* contents add here */}
+  //      <h1>Modal Content</h1>
+  //      <button onClick={closeModal}>Close Modal</button>
+  //  </CustomModal> 
 
 
 // add this func in func part

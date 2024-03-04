@@ -15,61 +15,61 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
       id: 1,
       title: "Task 1",
       done: false,
-      categorie: 2,
+      category: 2,
     },
     {
       id: 2,
       title: "Task 2",
       done: true,
-      categorie: 3,
+      category: 3,
     },
     {
       id: 3,
       title: "Task 3",
       done: false,
-      categorie: 1,
+      category: 1,
     },
     {
       id: 4,
       title: "Task 4",
       done: true,
-      categorie: 2,
+      category: 2,
     },
     {
       id: 5,
       title: "Task 5",
       done: false,
-      categorie: 3,
+      category: 3,
     },
     {
       id: 6,
       title: "Task 6",
       done: true,
-      categorie: 1,
+      category: 1,
     },
     {
       id: 7,
       title: "Task 7",
       done: false,
-      categorie: 2,
+      category: 2,
     },
     {
       id: 8,
       title: "Task 8",
       done: true,
-      categorie: 3,
+      category: 3,
     },
     {
       id: 9,
       title: "Task 9",
       done: false,
-      categorie: 1,
+      category: 1,
     },
     {
       id: 10,
       title: "Task 10",
       done: true,
-      categorie: 2,
+      category: 2,
     },
   ]);
 
@@ -92,6 +92,17 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
     setFilterTaskList(updatedArray);
   };
 
+  const addTask = (title: string, category: number) => {
+    const newTask = {
+      id: taskList.length + 1,
+      title: title,
+      done: false,
+      category: category,
+    };
+
+    setTaskList((prevTaskList) => [...prevTaskList, newTask]);
+  };
+
   return (
     <TaskListContext.Provider
       value={{
@@ -101,6 +112,7 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
         changeStatus,
         filterTasksByStatus,
         setFilterTaskList,
+        addTask,
       }}
     >
       {children}

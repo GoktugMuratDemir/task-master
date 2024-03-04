@@ -2,7 +2,7 @@ export interface TaskProps{
     id:number;
     title: string;
     done:boolean;
-    categorie: number;
+    category: number;
     // color: string;
 };
 
@@ -13,6 +13,7 @@ export type TaskListType = {
     setTaskList: React.Dispatch<React.SetStateAction<TaskProps[]>>;
     changeStatus: (taskId:number) =>void;
     filterTasksByStatus: (isDone:boolean) =>void;
+    addTask: (title: string, category: number) =>void;
     // doneTasks: TaskProps[];
     // notDoneTasks: TaskProps[];
     // addTask:(task: TaskProps)=>void;

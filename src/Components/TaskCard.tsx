@@ -12,11 +12,11 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   const { changeStatus } = useContext(TaskListContext) as TaskListType;
 
   const selectEnumCategory: CategoryEnumsProp | undefined = CategoryEnums.find(
-    (category) => category.value === task.categorie
+    (category) => category.value === task.category
   );
 
   return (
-    <div className="bg-white rounded grid grid-cols-12 items-center py-4 divide-x-1">
+    <div className="bg-white rounded-lg grid grid-cols-12 items-center py-4 divide-x-1">
       <div className="col-span-2 border-r-2">
         <div className="flex justify-center">
           <button
