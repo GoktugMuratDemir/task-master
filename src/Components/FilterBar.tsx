@@ -11,9 +11,13 @@ const buttonStyles = (isSelected: boolean) => {
 };
 
 export const FilterBar: React.FC = () => {
-  const { taskList, setFilterTaskList, filterTasksByStatus } = useContext(
-    TaskListContext
-  ) as TaskListType;
+  const {
+    taskList,
+    setFilterTaskList,
+    filterTasksByStatus,
+    searchTasks,
+    resetTasks,
+  } = useContext(TaskListContext) as TaskListType;
 
   const [selectedFilter, setSelectedFilter] = useState("all");
 
@@ -55,19 +59,55 @@ export const FilterBar: React.FC = () => {
     setSelectedFilter(filter);
   }, []);
 
+  const [searchKeyword, setSearchKeyword] = useState("");
+
+  const searchHandleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(event.target.value);
+  };
+
+  const handleSearchSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    searchTasks(searchKeyword);
+  };
+
   return (
     <>
       <div className="flex justify-between">
-        <div className="flex items-center text-lg font-semibold text-gray-800">
-          <button
-            className="bg-gray-100 p-2 rounded-lg flex items-center gap-2 justify-center"
-            onClick={openModal}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center text-lg font-semibold text-gray-800">
+            <button
+              className="bg-gray-100 p-2 rounded-lg flex items-center gap-2 justify-center"
+              onClick={openModal}
+            >
+              {" "}
+              <p className="text-sm font-semibold"> Add Task</p>
+              <img src="/Assets/add.svg" alt="" className="w-6 h-6" />
+            </button>
+          </div>
+
+          <form
+            onSubmit={handleSearchSubmit}
+            className="flex gap-1 items-center"
           >
-            {" "}
-            <p className="text-sm font-semibold"> Add Task</p>
-            <img src="/Assets/add.svg" alt="" className="w-6 h-6" />
-          </button>
+            <input
+              type="text"
+              value={searchKeyword}
+              onChange={searchHandleInput}
+              className="p-2 border rounded-md"
+            />
+            <button type="submit" className="border rounded-md bg-white p-1">
+              <img src="/Assets/search.svg" alt="" className="w-6 h-6" />
+            </button>
+            <button
+              type="button"
+              onClick={resetTasks}
+              className="border rounded-md bg-white p-1"
+            >
+              <img src="/Assets/reset.png" alt="" className="w-6 h-6" />
+            </button>
+          </form>
         </div>
+
         <div className="flex gap-2">
           {renderButton("all", "All")}
           {renderButton("done", "Done")}

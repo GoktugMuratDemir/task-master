@@ -18,4 +18,5 @@ export type TaskListType = {
   updateTask: (id: number, title: string, category: number) => void;
   deleteTask: (id: number) => void;
   searchTasks: (keyword: string) => void;
+  resetTasks: () => void;
 };
