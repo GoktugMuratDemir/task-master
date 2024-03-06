@@ -17,4 +17,5 @@ export type TaskListType = {
   findItemInArray: (id: number | null) => TaskProps | undefined;
   updateTask: (id: number, title: string, category: number) => void;
   deleteTask: (id: number) => void;
+  searchTasks: (keyword: string) => void;
 };

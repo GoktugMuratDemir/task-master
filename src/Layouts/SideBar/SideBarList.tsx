@@ -1,61 +1,144 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CategoryEnums } from "../../Enums/CategoryEnums";
 
 interface Category {
   name: string;
   to: string;
+  imgUrl?: string;
+  sublist?: Category[];
 }
 
-export const SideBarList: React.FC = () => {
-  const [openCategory, setOpenCategory] = useState<boolean>(false);
-  const navigate = useNavigate();
+const categories: Category[] = [
+  {
+    name: "All Types",
+    to: "/",
+    sublist: undefined,
+    imgUrl: "/Assets/task.png",
+  },
+  {
+    name: "Categories",
+    to: "/category/home",
+    imgUrl: "/Assets/folder.svg",
+    sublist: [
+      {
+        name: "Home",
+        to: "/category/home",
+        sublist: undefined,
+      },
+      {
+        name: "Work",
+        to: "/category/work",
+        sublist: undefined,
+      },
+      {
+        name: "Personal",
+        to: "/category/personal",
+        sublist: undefined,
+      },
+    ],
+  },
+];
 
-  const categories: Category[] = [
-    {
-      name: "Home",
-      to: "/category/home",
-    },
-    {
-      name: "Work",
-      to: "/category/work",
-    },
-    {
-      name: "Personal",
-      to: "/category/personal",
-    },
-    // Diğer kategorileri buraya ekleyebilirsiniz
-  ];
+const SideBarList: React.FC = () => {
+  const [openCategories, setOpenCategories] = useState<string[]>([]);
+  const navigate = useNavigate();
 
   const handleSubCategoryClick = (to: string) => {
     navigate(to);
   };
 
-  return (
-    <div className="flex flex-col gap-4">
+  const toggleOpenCategory = (to: string) => {
+    setOpenCategories((prevOpenCategories) => {
+      if (prevOpenCategories.includes(to)) {
+        return prevOpenCategories.filter((category) => category !== to);
+      } else {
+        return [...prevOpenCategories, to];
+      }
+    });
+  };
+
+  const renderSubcategories = (sublist?: Category[], parentTo?: string) => {
+    if (!sublist || !openCategories.includes(parentTo || "")) {
+      return null;
+    }
+
+    return sublist.map((subCategory) => {
+      const categoryTitle = (
+        subCategory.to.toLowerCase().split("/")[2] || ""
+      ).toLowerCase();
+
+      const matchedCategory = CategoryEnums.find(
+        (item) => item.title.toLowerCase() === categoryTitle
+      );
+
+      return (
+        <div
+          key={subCategory.to}
+          className="cursor-pointer flex items-center gap-6"
+          onClick={() => handleSubCategoryClick(subCategory.to)}
+        >
+          <div
+            style={{ background: matchedCategory?.color }}
+            className="w-3 h-3 rounded-full"
+          ></div>
+          <div>{subCategory.name}</div>
+        </div>
+      );
+    });
+  };
+
+  const renderCategory = (category: Category) => (
+    <div key={category.to} className="flex flex-col">
       <div
-        className="cursor-pointer"
-        onClick={() => handleSubCategoryClick("/")}
+        className="flex gap-3 items-center cursor-pointer"
+        onClick={() => {
+          category.sublist && toggleOpenCategory(category.to);
+        }}
       >
-        All Types
-      </div>
-      <div
-        className="cursor-pointer"
-        onClick={() => setOpenCategory(!openCategory)}
-      >
-        Categories
-        {openCategory && (
-          <ul className="ml-4">
-            {categories.map((category) => (
-              <div
-                className="cursor-pointer"
-                onClick={() => handleSubCategoryClick(category.to)}
-              >
-                {category.name}
-              </div>
-            ))}
-          </ul>
+        <div className="flex items-center gap-3">
+          <img
+            src={category.imgUrl}
+            className="w-5 h-5 object-contain"
+            alt=""
+          />
+          <div
+            className="text-lg font-bold"
+            onClick={() => {
+              !category.sublist && handleSubCategoryClick(category.to);
+            }}
+          >
+            {category.name}
+          </div>
+        </div>
+        {category.sublist && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className={`h-4 w-4 ${
+              openCategories.includes(category.to) ? "transform rotate-90" : ""
+            }`}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="3"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
         )}
       </div>
+      {renderSubcategories(category.sublist, category.to)}
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col p-4 gap-4">
+      {categories.map((category) => renderCategory(category))}
     </div>
   );
 };
+
+export default SideBarList;

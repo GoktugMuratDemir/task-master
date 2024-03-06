@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
-import { SideBarList } from "./SideBar/SideBarList";
+import SideBarList from "./SideBar/SideBarList";
+
 
 export const LayoutMain = () => {
   return (

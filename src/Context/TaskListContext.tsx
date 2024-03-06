@@ -119,6 +119,13 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
     setTaskList((prevTaskList) => prevTaskList.filter((task) => task.id !== id));
   };
 
+  const searchTasks = (keyword: string) => {
+    const filteredTasks = taskList.filter((task) =>
+      task.title.toLowerCase().includes(keyword.toLowerCase())
+    );
+    setFilterTaskList(filteredTasks);
+  };
+
   return (
     <TaskListContext.Provider
       value={{
@@ -131,7 +138,8 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
         addTask,
         findItemInArray,
         updateTask,
-        deleteTask
+        deleteTask,
+        searchTasks
       }}
     >
       {children}
