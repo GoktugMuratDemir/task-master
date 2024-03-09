@@ -6,8 +6,8 @@ import AddEditTaskForm from "./AddEditTaskForm";
 
 const buttonStyles = (isSelected: boolean) => {
   return isSelected
-    ? "bg-gray-100 text-sm font-semibold p-2 rounded-lg transition duration-300 ease-in-out"
-    : "text-gray-400 text-sm bg-transparent border border-solid border-gray-400 rounded-lg px-2";
+    ? "bg-gray-100 text-sm font-semibold p-2 rounded-lg transition duration-300 ease-in-out max-md:text-xs"
+    : "text-gray-400 text-sm bg-transparent border border-solid border-gray-400 rounded-lg px-2 max-md:text-xs";
 };
 
 export const FilterBar: React.FC = () => {
@@ -80,8 +80,8 @@ export const FilterBar: React.FC = () => {
               onClick={openModal}
             >
               {" "}
-              <p className="text-sm font-semibold"> Add Task</p>
-              <img src="/Assets/add.svg" alt="" className="w-6 h-6" />
+              <p className="text-sm font-semibold max-md:text-xs">Add Task</p>
+              <img src="/Assets/add.svg" alt="" className="w-6 h-6 max-md:w-3 max-md:h-3" />
             </button>
           </div>
 
@@ -93,22 +93,24 @@ export const FilterBar: React.FC = () => {
               type="text"
               value={searchKeyword}
               onChange={searchHandleInput}
-              className="p-2 border rounded-md"
+              className="p-2 border rounded-md max-md:w-7/12 "
             />
-            <button type="submit" className="border rounded-md bg-white p-1">
-              <img src="/Assets/search.svg" alt="" className="w-6 h-6" />
+           <div className="flex gap-1 max-md:flex-col">
+           <button type="submit" className="border rounded-md bg-white p-1">
+              <img src="/Assets/search.svg" alt="" className="w-6 h-6 max-md:w-3 max-md:h-3" />
             </button>
             <button
               type="button"
               onClick={resetTasks}
               className="border rounded-md bg-white p-1"
             >
-              <img src="/Assets/reset.png" alt="" className="w-6 h-6" />
+              <img src="/Assets/reset.png" alt="" className="w-6 h-6 max-md:w-3 max-md:h-3" />
             </button>
+           </div>
           </form>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 max-md:flex-col">
           {renderButton("all", "All")}
           {renderButton("done", "Done")}
           {renderButton("notDone", "Not Done")}
