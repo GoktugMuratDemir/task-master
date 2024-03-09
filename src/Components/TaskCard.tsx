@@ -12,7 +12,9 @@ interface TaskCardProps {
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
-  const { changeStatus,deleteTask } = useContext(TaskListContext) as TaskListType;
+  const { changeStatus, deleteTask } = useContext(
+    TaskListContext
+  ) as TaskListType;
 
   const selectEnumCategory: CategoryEnumsProp | undefined = CategoryEnums.find(
     (category) => category.value === task.category
@@ -25,8 +27,8 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   const closeModal = () => setIsModalOpen(false);
 
   const handleConfirm = () => {
-    deleteTask(task.id)
-    closeModal()
+    deleteTask(task.id);
+    closeModal();
   };
 
   return (
@@ -45,16 +47,18 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           </div>
         </div>
         <div className="col-span-8 px-8">
-          <div>{task.title}</div>
+          <div className="text-base max-md:text-sm truncate">{task.title}</div>
           <div className="flex gap-2 items-center">
             <div
               style={{ background: selectEnumCategory?.color }}
               className={` w-2 h-2 rounded-full`}
             ></div>
-            <div>{selectEnumCategory?.title}</div>
+            <div className="text-sm max-md:text-xs text-teal-800 italic">
+              {selectEnumCategory?.title}
+            </div>
           </div>
         </div>
-        <div className="col-span-1 flex justify-center">
+        <div className="col-span-1 flex justify-center max-md:justify-start">
           <button
             onClick={() => {
               setIsConfirmModal(false);
@@ -68,7 +72,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
             />
           </button>
         </div>
-        <div className="col-span-1 flex justify-center">
+        <div className="col-span-1 flex justify-center max-md:justify-start">
           <button
             onClick={() => {
               setIsConfirmModal(true);
