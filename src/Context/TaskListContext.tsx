@@ -84,7 +84,7 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
   };
 
   const changeStatus = (id: number) => {
-    setTaskList((prevTaskList) =>
+    setFilterTaskList((prevTaskList) =>
       prevTaskList.map((task) =>
         task.id === id ? { ...task, done: !task.done } : task
       )
