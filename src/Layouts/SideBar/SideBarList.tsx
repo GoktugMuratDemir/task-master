@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { CategoryEnums } from "../../Enums/CategoryEnums";
 
 interface Category {
@@ -44,6 +44,8 @@ const SideBarList: React.FC = () => {
   const [openCategories, setOpenCategories] = useState<string[]>([]);
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   const handleSubCategoryClick = (to: string) => {
     navigate(to);
   };
@@ -72,6 +74,8 @@ const SideBarList: React.FC = () => {
         (item) => item.title.toLowerCase() === categoryTitle
       );
 
+      const isActive = location.pathname === subCategory.to;
+
       return (
         <div
           key={subCategory.to}
@@ -82,7 +86,25 @@ const SideBarList: React.FC = () => {
             style={{ background: matchedCategory?.color }}
             className="w-3 h-3 rounded-full"
           ></div>
-          <div>{subCategory.name}</div>
+          <div className={`${isActive ? "text-fuchsia-950" : ""}`}>
+            {subCategory.name}
+          </div>
+          {isActive && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className={`h-2 w-2 transform rotate-90`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          )}
         </div>
       );
     });

@@ -13,7 +13,7 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   
   return (
-    <div className="flex justify-center items-center space-x-2 mt-4">
+    <div className="flex justify-center items-center space-x-2 mt-4 max-md:text-sm">
       <button
         className={`px-3 py-2 rounded-lg ${
           currentPage === 1
