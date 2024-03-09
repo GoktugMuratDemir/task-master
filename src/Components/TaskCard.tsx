@@ -53,7 +53,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
               style={{ background: selectEnumCategory?.color }}
               className={` w-2 h-2 rounded-full`}
             ></div>
-            <div className="text-sm max-md:text-xs text-teal-800 italic">
+            <div style={{ color: selectEnumCategory?.color }} className="text-sm max-md:text-xs italic">
               {selectEnumCategory?.title}
             </div>
           </div>

@@ -5,12 +5,12 @@ export const CategoryEnums: CategoryEnumsProp[] = [
   {
     value: 1,
     title: "Home",
-    color: "#00FFFF",
+    color: "#81A595",
   },
   {
     value: 2,
     title: "Work",
-    color: "#00FF00",
+    color: "#5379A3",
   },
   {
     value: 3,
