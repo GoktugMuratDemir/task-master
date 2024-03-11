@@ -1,10 +1,12 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../../Config/FireBase";
+import { useNavigate } from "react-router-dom";
 
 export const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate()
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,6 +62,15 @@ export const Login: React.FC = () => {
             </button>
           </div>
         </form>
+
+        <div className="mt-4 text-center">
+          <button
+            className="text-blue-500 hover:underline"
+            onClick={() => navigate("/auth/register")}
+          >
+            Don't have an account? Register
+          </button>
+        </div>
       </div>
     </div>
   );
