@@ -7,7 +7,7 @@ interface ConfirmMessageProps {
   onCancel: () => void;
 }
 
-const ConfirmMessage: React.FC<ConfirmMessageProps> = ({
+const CustomConfirmMessage: React.FC<ConfirmMessageProps> = ({
   title,
   message,
   onConfirm,
@@ -37,4 +37,4 @@ const ConfirmMessage: React.FC<ConfirmMessageProps> = ({
   );
 };
 
-export default ConfirmMessage;
+export default CustomConfirmMessage;

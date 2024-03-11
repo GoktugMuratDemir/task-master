@@ -1,16 +1,17 @@
 import React, { useContext, useState } from "react";
-import { TaskListContext } from "../../Context/TaskListContext";
-import { HeaderTitle } from "../../Components/HeaderTitle";
-import { FilterBar } from "../../Components/FilterBar";
-import TaskCard from "../../Components/TaskCard";
-import Pagination from "../../Components/Pagination";
-import { TaskListType } from "../../Context/TaskType";
+import { TaskListContext } from "../../../Context/TaskListContext";
+import { HeaderTitle } from "../../../Components/HeaderTitle";
+import { FilterBar } from "../../../Components/FilterBar";
+import TaskCard from "../../../Components/TaskCard";
+import Pagination from "../../../Components/Pagination";
+import { TaskListType } from "../../../Context/TaskType";
 
-export const PersonalCategoryPage = () => {
+export const HomeCategoryPage = () => {
   const { filterTaskList } = useContext(TaskListContext) as TaskListType;
 
-  // CategorieEnums Personal Category === 3
-  const homeTasks = filterTaskList.filter((task) => task.category === 3);
+
+  // CategorieEnums Home Category === 1
+  const homeTasks = filterTaskList.filter((task) => task.category === 1);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 4;

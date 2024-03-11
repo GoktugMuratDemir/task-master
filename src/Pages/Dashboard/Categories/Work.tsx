@@ -1,18 +1,21 @@
 import React, { useContext, useState } from "react";
-import { HeaderTitle } from "../Components/HeaderTitle";
-import { FilterBar } from "../Components/FilterBar";
-import TaskCard from "../Components/TaskCard";
-import { TaskListContext } from "../Context/TaskListContext";
-import { TaskListType } from "../Context/TaskType";
-import Pagination from "../Components/Pagination";
+import { TaskListContext } from "../../../Context/TaskListContext";
+import { HeaderTitle } from "../../../Components/HeaderTitle";
+import { FilterBar } from "../../../Components/FilterBar";
+import TaskCard from "../../../Components/TaskCard";
+import Pagination from "../../../Components/Pagination";
+import { TaskListType } from "../../../Context/TaskType";
 
-export const Home: React.FC = () => {
+export const WorkCategoryPage = () => {
   const { filterTaskList } = useContext(TaskListContext) as TaskListType;
+
+  // CategorieEnums Work Category === 2
+  const homeTasks = filterTaskList.filter((task) => task.category === 2);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 4;
 
-  const totalPages = Math.ceil(filterTaskList.length / itemsPerPage);
+  const totalPages = Math.ceil(homeTasks.length / itemsPerPage);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -21,7 +24,7 @@ export const Home: React.FC = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  const displayedTasks = filterTaskList.slice(startIndex, endIndex);
+  const displayedTasks = homeTasks.slice(startIndex, endIndex);
 
   return (
     <div className="flex flex-col gap-10">

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
 import SideBarList from "./SideBar/SideBarList";
+import { Outlet } from "react-router-dom";
 
-export const LayoutMain: React.FC = () => {
+export const DashboardLayoutMain = () => {
   const [isOpenNav, setIsOpenNav] = useState<boolean>(false);
 
   const toggleNav = () => {
@@ -36,5 +36,3 @@ export const LayoutMain: React.FC = () => {
     </div>
   );
 };
-
-

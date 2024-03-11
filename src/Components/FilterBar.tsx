@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import { TaskListContext } from "../Context/TaskListContext";
 import { TaskListType } from "../Context/TaskType";
-import CustomModal from "./CustomModal";
+import CustomModal from "./CustomModels/CustomModal";
 import AddEditTaskForm from "./AddEditTaskForm";
 
 const buttonStyles = (isSelected: boolean) => {

@@ -3,9 +3,9 @@ import { TaskListType, TaskProps } from "../Context/TaskType";
 import { TaskListContext } from "../Context/TaskListContext";
 import { CategoryEnums } from "../Enums/CategoryEnums";
 import { CategoryEnumsProp } from "../Enums/CategoryEnumsType";
-import CustomModal from "./CustomModal";
+import CustomModal from "./CustomModels/CustomModal";
 import AddEditTaskForm from "./AddEditTaskForm";
-import ConfirmMessage from "./ConfirmMessage";
+import ConfirmMessage from "./CustomModels/CustomConfirmMessage";
 
 interface TaskCardProps {
   task: TaskProps;
