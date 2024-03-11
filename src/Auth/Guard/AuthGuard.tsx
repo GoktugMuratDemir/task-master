@@ -5,9 +5,11 @@ import useAuth from "../../Hooks/Auth/useAuth";
 export const AuthGuard: React.FC = () => {
   const authUser = useAuth();
 
-  if (!authUser) {
-    return <Outlet />;
+  // console.log("au", authUser);
+
+  if (authUser === undefined) {
+    return null;
   }
 
-  return <Navigate to="/" />;
+  return !authUser ? <Outlet /> : <Navigate to="/" />;
 };
