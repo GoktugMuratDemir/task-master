@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CategoryEnums } from "../../../Enums/CategoryEnums";
-import { signOut } from "firebase/auth";
-import { auth } from "../../../Config/FireBase";
 
 interface Category {
   name: string;
@@ -52,14 +50,7 @@ const SideBarList: React.FC = () => {
     navigate(to);
   };
 
-  const handleLogout = async (): Promise<void> => {
-    try {
-      await signOut(auth);
-      navigate("/auth/login");
-    } catch (error) {
-      
-    }
-  };
+  
 
   const toggleOpenCategory = (to: string) => {
     setOpenCategories((prevOpenCategories) => {
@@ -170,7 +161,6 @@ const SideBarList: React.FC = () => {
   return (
     <div className="flex flex-col p-4 gap-4">
       {categories.map((category) => renderCategory(category))}
-      <button onClick={handleLogout}>Çıkış yap</button>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SideBarList from "./SideBar/SideBarList";
 import { Outlet } from "react-router-dom";
+import { LogoutButton } from "../../Components/LogoutButton";
 
 export const DashboardLayoutMain = () => {
   const [isOpenNav, setIsOpenNav] = useState<boolean>(false);
@@ -14,10 +15,13 @@ export const DashboardLayoutMain = () => {
       {/* Sidebar */}
       <div
         className={`col-span-3 bg-gray-50 p-4 flex items-center justify-center max-md:${
-          !isOpenNav && "hidden"
-        } ${isOpenNav ? "col-span-full" : ""}`}
+          isOpenNav ? "flex col-span-full" : "hidden"
+        }`}
       >
         <SideBarList />
+        <div className="absolute bottom-5">
+          <LogoutButton />
+        </div>
       </div>
 
       {/* Main Content */}
@@ -30,7 +34,7 @@ export const DashboardLayoutMain = () => {
       </div>
 
       {/* Toggle Button */}
-      <div className="absolute top-5 left-5 hidden max-md:block">
+      <div className="absolute top-5 left-5 hidden mt-auto max-md:block">
         <button onClick={toggleNav}>{isOpenNav ? "<" : "=>"}</button>
       </div>
     </div>
