@@ -1,17 +1,26 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../../Config/FireBase";
-import { useNavigate } from "react-router-dom";
+
+import { FormInputGroup } from "../../Components/Form/FormInputGroup";
+import { FormSubmitButton } from "../../Components/Form/FormSubmitButton";
+import { AuthNavigateButton } from "../../Components/AuthNavigateButton";
+
+interface FormData {
+  email: string;
+  password: string;
+}
 
 export const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const navigate = useNavigate()
+  const [formData, setFormData] = useState<FormData>({
+    email: "",
+    password: "",
+  });
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    await signInWithEmailAndPassword(auth, email, password)
+    await signInWithEmailAndPassword(auth, formData.email, formData.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -29,48 +38,29 @@ export const Login: React.FC = () => {
       <div className="bg-white p-8 rounded shadow-md">
         <h2 className="text-2xl font-bold mb-4">Login</h2>
         <form onSubmit={onSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-600">
-              Email:
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="mt-1 p-2 w-full border rounded-md"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-600">
-              Password:
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="mt-1 p-2 w-full border rounded-md"
-            />
-          </div>
-          <div>
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
-            >
-              Login
-            </button>
-          </div>
+          <FormInputGroup
+            type="email"
+            value={formData.email}
+            label="Email"
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+          />
+          <FormInputGroup
+            type="password"
+            value={formData.password}
+            label="Password"
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
+          />
+          <FormSubmitButton title="Login" />
         </form>
 
-        <div className="mt-4 text-center">
-          <button
-            className="text-blue-500 hover:underline"
-            onClick={() => navigate("/auth/register")}
-          >
-            Don't have an account? Register
-          </button>
-        </div>
+        <AuthNavigateButton
+          title="Don't have an account? Register"
+          to="/auth/register"
+        />
       </div>
     </div>
   );
