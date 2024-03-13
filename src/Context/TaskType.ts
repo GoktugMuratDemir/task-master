@@ -1,7 +1,7 @@
 export interface TaskProps {
   id: number;
   title: string;
-  done: boolean;
+  isDone: boolean;
   category: number;
   // color: string;
 }

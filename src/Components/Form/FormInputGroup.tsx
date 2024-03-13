@@ -14,7 +14,7 @@ export const FormInputGroup: React.FC<FormInputGroupProps> = ({
   onChange,
 }) => {
   return (
-    <>
+    <div>
       <label className="block text-sm font-medium text-gray-600">
         {label}:
       </label>
@@ -23,8 +23,8 @@ export const FormInputGroup: React.FC<FormInputGroupProps> = ({
         value={value}
         onChange={onChange}
         required
-        className="mt-1 p-2 w-full border rounded-md"
+        className="mt-2 p-2 w-full border rounded-md"
       />
-    </>
+    </div>
   );
 };

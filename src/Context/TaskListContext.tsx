@@ -14,61 +14,61 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
     {
       id: 1,
       title: "Task 1",
-      done: false,
+      isDone: false,
       category: 2,
     },
     {
       id: 2,
       title: "Task 2",
-      done: true,
+      isDone: true,
       category: 3,
     },
     {
       id: 3,
       title: "Task 3",
-      done: false,
+      isDone: false,
       category: 1,
     },
     {
       id: 4,
       title: "Task 4",
-      done: true,
+      isDone: true,
       category: 2,
     },
     {
       id: 5,
       title: "Task 5",
-      done: false,
+      isDone: false,
       category: 3,
     },
     {
       id: 6,
       title: "Task 6",
-      done: true,
+      isDone: true,
       category: 1,
     },
     {
       id: 7,
       title: "Task 7",
-      done: false,
+      isDone: false,
       category: 2,
     },
     {
       id: 8,
       title: "Task 8",
-      done: true,
+      isDone: true,
       category: 3,
     },
     {
       id: 9,
       title: "Task 9",
-      done: false,
+      isDone: false,
       category: 1,
     },
     {
       id: 10,
       title: "Task 10",
-      done: true,
+      isDone: true,
       category: 2,
     },
   ]);
@@ -86,13 +86,13 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
   const changeStatus = (id: number) => {
     setFilterTaskList((prevTaskList) =>
       prevTaskList.map((task) =>
-        task.id === id ? { ...task, done: !task.done } : task
+        task.id === id ? { ...task, done: !task.isDone } : task
       )
     );
   };
 
   const filterTasksByStatus = (isDone: boolean) => {
-    const updatedArray = taskList.filter((task) => task.done === isDone);
+    const updatedArray = taskList.filter((task) => task.isDone === isDone);
     setFilterTaskList(updatedArray);
   };
 
@@ -100,7 +100,7 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
     const newTask = {
       id: taskList.length + 1,
       title: title,
-      done: false,
+      isDone: false,
       category: category,
     };
 

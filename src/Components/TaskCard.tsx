@@ -40,7 +40,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
               onClick={() => changeStatus(task.id)}
               className="w-6 h-6 border-2 border-purple-600 rounded-full flex items-center justify-center cursor-pointer"
             >
-              {task.done && (
+              {task.isDone && (
                 <div className="w-4 h-4 bg-purple-600 rounded-full"></div>
               )}
             </button>
