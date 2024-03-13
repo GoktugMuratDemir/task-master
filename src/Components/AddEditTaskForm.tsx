@@ -7,7 +7,7 @@ import { FormSelectGroup } from "./Form/FormSelectGroup";
 import { FormSubmitButton } from "./Form/FormSubmitButton";
 
 interface AddEditTaskFormProps {
-  id: number | null;
+  id: string | null;
   closeModal: () => void;
 }
 
