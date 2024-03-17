@@ -1,0 +1,1 @@
+- Admin herkesi siler normal kullanıcı yalnzıca kendininkine siler

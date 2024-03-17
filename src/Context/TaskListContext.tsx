@@ -6,7 +6,7 @@ import {
   collection,
   deleteDoc,
   doc,
-  onSnapshot,
+  getDocs,
   query,
   updateDoc,
 } from "firebase/firestore";
@@ -33,29 +33,24 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
 
   // ** get taskList
   useEffect(() => {
-    getAllFirebaseTasks();
+    getAllFireBaseTasks();
   }, []);
 
-  const getAllFirebaseTasks = async () => {
+  const getAllFireBaseTasks = async () => {
     const tasksCollection = collection(db, "tasks");
     const tasksQuery = query(tasksCollection);
-
-    const unsubscribe = onSnapshot(tasksQuery, (querySnapshot) => {
-      const newTaskList: TaskProps[] = [];
-      querySnapshot.forEach((doc) => {
-        newTaskList.push({ ...doc.data(), id: doc.id } as unknown as TaskProps);
-      });
-      setTaskList(newTaskList);
+    const querySnapshot = await getDocs(tasksQuery);
+    const newTaskList: TaskProps[] = [];
+    querySnapshot.forEach((doc) => {
+      newTaskList.push({ ...doc.data(), id: doc.id } as unknown as TaskProps);
     });
-
-    return () => {
-      unsubscribe();
-    };
-  };
+    setTaskList(newTaskList);
+  }
 
   // ** add Task
 
-  const addTask = async (title: string, category: number) => {
+  const addTask = async (title: string, category: number): Promise<void> => {
+
     const newTask = {
       id: generateRandomId(),
       title: title,
@@ -65,7 +60,7 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
 
     await addDoc(collection(db, "tasks"), newTask);
 
-    // setTaskList((prevTaskList) => [...prevTaskList, newTask]);
+    setTaskList((prevTaskList) => [...prevTaskList, newTask]);
   };
 
   // ** delete Task
@@ -73,9 +68,9 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
   const deleteTask = async (id: string) => {
     await deleteDoc(doc(db, "tasks", id));
 
-    // setTaskList((prevTaskList) =>
-    //   prevTaskList.filter((task) => task.id !== id)
-    // );
+    setTaskList((prevTaskList) =>
+      prevTaskList.filter((task) => task.id !== id)
+    );
   };
 
   // ** update Task
@@ -88,11 +83,11 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
 
     await updateDoc(doc(db, "tasks", id), updatedTask);
 
-    // setTaskList((prevTaskList) =>
-    //   prevTaskList.map((task) =>
-    //     task.id === id ? { ...task, title, category } : task
-    //   )
-    // );
+    setTaskList((prevTaskList) =>
+      prevTaskList.map((task) =>
+        task.id === id ? { ...task, title, category } : task
+      )
+    );
   };
 
   const changeStatus = async (id: string) => {
@@ -102,11 +97,11 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
         isDone: !foundedTask.isDone,
       };
       await updateDoc(doc(db, "tasks", id), updatedTask);
-      // setTaskList((prevTaskList) =>
-      //   prevTaskList.map((task) =>
-      //     task.id === id ? { ...task, isDone: !task.isDone } : task
-      //   )
-      // );
+      setTaskList((prevTaskList) =>
+        prevTaskList.map((task) =>
+          task.id === id ? { ...task, isDone: !task.isDone } : task
+        )
+      );
     }
   };
 
