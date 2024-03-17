@@ -1,6 +1,6 @@
 # Task Master
 
-This project is a Todo application written in React with TypeScript. Tailwind CSS has been utilized for the design, and the entire structure and components have been manually created without the use of any additional libraries.
+This project is a task application written in React with TypeScript. Tailwind CSS has been utilized for the design, and the entire structure and components. Operations conducted using Firebase include Auth Guard and API processes.
 
 # Live Preview
 
