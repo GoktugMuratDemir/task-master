@@ -57,7 +57,9 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <button
-            onClick={() => changeStatus(task.id)}
+            onClick={() => {
+              isAccessibilityPermission(task.userId) && changeStatus(task.id);
+            }}
             className="w-6 h-6 border-2 border-purple-600 rounded-full flex items-center justify-center cursor-pointer mr-4"
           >
             {task.isDone && (
