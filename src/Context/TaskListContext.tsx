@@ -11,6 +11,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { generateRandomId } from "../Utils/RandomUniqId";
+import { toast } from "react-toastify";
 
 interface ChildrenProps {
   children: React.ReactNode;
@@ -58,6 +59,8 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
       category: category,
     };
 
+    toast.success("Task Added Successfully!");
+
     await addDoc(collection(db, "tasks"), newTask);
 
     setTaskList((prevTaskList) => [...prevTaskList, newTask]);
@@ -67,6 +70,8 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
 
   const deleteTask = async (id: string) => {
     await deleteDoc(doc(db, "tasks", id));
+
+    toast.error("Task Deleted Successfully!");
 
     setTaskList((prevTaskList) =>
       prevTaskList.filter((task) => task.id !== id)
@@ -80,6 +85,8 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
       title: title,
       category: category,
     };
+
+    toast.success("Task Updated Successfully!");
 
     await updateDoc(doc(db, "tasks", id), updatedTask);
 
@@ -97,6 +104,9 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
         isDone: !foundedTask.isDone,
       };
       await updateDoc(doc(db, "tasks", id), updatedTask);
+
+      toast.success("Task Status Changed Successfully!");
+      
       setTaskList((prevTaskList) =>
         prevTaskList.map((task) =>
           task.id === id ? { ...task, isDone: !task.isDone } : task

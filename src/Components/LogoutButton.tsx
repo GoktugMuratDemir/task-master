@@ -2,6 +2,7 @@ import { signOut } from "firebase/auth";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../Config/FireBase";
+import { toast } from "react-toastify";
 
 export const LogoutButton = () => {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ export const LogoutButton = () => {
   const handleLogout = async (): Promise<void> => {
     try {
       await signOut(auth);
+      toast.success("Logout Successfull!");
       navigate("/auth/login");
     } catch (error) {}
   };

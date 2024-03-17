@@ -5,6 +5,7 @@ import { auth } from "../../Config/FireBase";
 import { FormInputGroup } from "../../Components/Form/FormInputGroup";
 import { FormSubmitButton } from "../../Components/Form/FormSubmitButton";
 import { AuthNavigateButton } from "../../Components/AuthNavigateButton";
+import { toast } from "react-toastify";
 
 interface FormData {
   email: string;
@@ -24,11 +25,13 @@ export const Login: React.FC = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        toast.success("Login Successfull!");
         console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        toast.error(errorMessage);
         console.log(errorCode, errorMessage);
       });
   };
