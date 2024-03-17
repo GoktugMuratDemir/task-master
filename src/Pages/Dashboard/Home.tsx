@@ -4,13 +4,13 @@ import { FilterBar } from "../../Components/FilterBar";
 import TaskCard from "../../Components/TaskCard";
 import { TaskListContext } from "../../Context/TaskListContext";
 import { TaskListType } from "../../Context/TaskType";
-import Pagination from "../../Components/Pagination";
+import Pagination, { defaultItemsPerPage } from "../../Components/Pagination";
 
 export const Home: React.FC = () => {
   const { filterTaskList } = useContext(TaskListContext) as TaskListType;
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = defaultItemsPerPage;
 
   const totalPages = Math.ceil(filterTaskList.length / itemsPerPage);
 

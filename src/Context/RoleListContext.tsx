@@ -39,7 +39,6 @@ export const RoleListContextProvider: React.FC<ChildrenProps> = ({
   return (
     <RoleListContext.Provider
       value={{
-        roleList,
         isAdminUser
       }}
     >

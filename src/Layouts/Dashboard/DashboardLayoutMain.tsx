@@ -14,8 +14,8 @@ export const DashboardLayoutMain = () => {
     <div className="mx-auto max-h-screen h-screen grid grid-cols-12 relative">
       {/* Sidebar */}
       <div
-        className={`col-span-3 bg-gray-50 p-4 flex items-center justify-center max-md:${
-          isOpenNav ? "flex col-span-full" : "hidden"
+        className={`col-span-3 bg-gray-50 p-4 flex items-center justify-center ${
+          isOpenNav ? "max-md:flex col-span-full" : "max-md:hidden"
         }`}
       >
         <SideBarList />

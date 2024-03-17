@@ -6,6 +6,8 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
+export const defaultItemsPerPage = 10;
+
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,

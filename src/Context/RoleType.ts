@@ -4,7 +4,7 @@ export interface RoleProps {
   }
   
   export type RoleListType = {
-    roleList: RoleProps[];
+    // roleList: RoleProps[];
     isAdminUser: boolean;
     // setRoleList: React.Dispatch<React.SetStateAction<RoleProps[]>>;
     // getRoleList: () => void;
