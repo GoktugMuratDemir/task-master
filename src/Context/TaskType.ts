@@ -1,5 +1,8 @@
 export interface TaskProps {
   id: string;
+  userId : string;
+  userEmail: string;
+  isCreatorAdmin: boolean;
   title: string;
   isDone: boolean;
   category: number;

@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useEffect, useContext } from "react";
 import { TaskListType, TaskProps } from "./TaskType";
 import { db } from "../Config/FireBase";
 import {
@@ -12,6 +12,8 @@ import {
 } from "firebase/firestore";
 import { generateRandomId } from "../Utils/RandomUniqId";
 import { toast } from "react-toastify";
+import { RoleListContext } from "./RoleListContext";
+import { RoleListType } from "./RoleType";
 
 interface ChildrenProps {
   children: React.ReactNode;
@@ -22,6 +24,8 @@ export const TaskListContext = createContext<TaskListType | null>(null);
 export const TaskListContextProvider: React.FC<ChildrenProps> = ({
   children,
 }) => {
+  const { isAdminUser, userInfo } = useContext(RoleListContext) as RoleListType;
+
   const [taskList, setTaskList] = useState<Array<TaskProps>>([]);
 
   const [filterTaskList, setFilterTaskList] = useState<TaskProps[]>([]);
@@ -30,7 +34,9 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
     setFilterTaskList(taskList);
   }, [taskList]);
 
-  // ** With Fire Base Section
+
+
+  // ** ** With Fire Base Section
 
   // ** get taskList
   useEffect(() => {
@@ -46,14 +52,16 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
       newTaskList.push({ ...doc.data(), id: doc.id } as unknown as TaskProps);
     });
     setTaskList(newTaskList);
-  }
+  };
 
   // ** add Task
 
   const addTask = async (title: string, category: number): Promise<void> => {
-
     const newTask = {
       id: generateRandomId(),
+      userId: userInfo.userId as string,
+      userEmail: userInfo.userEmail as string,
+      isCreatorAdmin: isAdminUser,
       title: title,
       isDone: false,
       category: category,
@@ -69,6 +77,7 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
   // ** delete Task
 
   const deleteTask = async (id: string) => {
+  
     await deleteDoc(doc(db, "tasks", id));
 
     toast.error("Task Deleted Successfully!");
@@ -106,7 +115,7 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
       await updateDoc(doc(db, "tasks", id), updatedTask);
 
       toast.success("Task Status Changed Successfully!");
-      
+
       setTaskList((prevTaskList) =>
         prevTaskList.map((task) =>
           task.id === id ? { ...task, isDone: !task.isDone } : task
@@ -152,6 +161,7 @@ export const TaskListContextProvider: React.FC<ChildrenProps> = ({
         deleteTask,
         searchTasks,
         resetTasks,
+        
       }}
     >
       {children}

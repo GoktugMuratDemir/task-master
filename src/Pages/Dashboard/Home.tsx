@@ -5,7 +5,6 @@ import TaskCard from "../../Components/TaskCard";
 import { TaskListContext } from "../../Context/TaskListContext";
 import { TaskListType } from "../../Context/TaskType";
 import Pagination, { defaultItemsPerPage } from "../../Components/Pagination";
-import { toast } from "react-toastify";
 
 export const Home: React.FC = () => {
   const { filterTaskList } = useContext(TaskListContext) as TaskListType;
@@ -24,8 +23,6 @@ export const Home: React.FC = () => {
 
   const displayedTasks = filterTaskList.slice(startIndex, endIndex);
 
-
-
   return (
     <div className="flex flex-col gap-10">
       <HeaderTitle title="All Types" />
@@ -36,14 +33,6 @@ export const Home: React.FC = () => {
           <TaskCard key={index} task={task} />
         ))}
       </div>
-
-      <button
-        onClick={() => {
-          toast.success('This is a success toast');
-        }}
-      >
-        Show Toast
-      </button>
 
       <Pagination
         currentPage={currentPage}

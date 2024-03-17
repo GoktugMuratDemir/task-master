@@ -6,6 +6,8 @@ import { CategoryEnumsProp } from "../Enums/CategoryEnumsType";
 import CustomModal from "./CustomModels/CustomModal";
 import AddEditTaskForm from "./AddEditTaskForm";
 import ConfirmMessage from "./CustomModels/CustomConfirmMessage";
+import { RoleListContext } from "../Context/RoleListContext";
+import { RoleListType } from "../Context/RoleType";
 
 interface TaskCardProps {
   task: TaskProps;
@@ -16,14 +18,18 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
     TaskListContext
   ) as TaskListType;
 
+  const { isAdminUser, isAccessibility, isAccessibilityPermission } =
+    useContext(RoleListContext) as RoleListType;
+
   const selectEnumCategory: CategoryEnumsProp | undefined = CategoryEnums.find(
     (category) => category.value === task.category
   );
 
   const [isConfirmModal, setIsConfirmModal] = useState<boolean>(true);
-
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const openModal = () => setIsModalOpen(true);
+
+  const openModal = () =>
+    isAccessibilityPermission(task.userId) && setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   const handleConfirm = () => {
@@ -32,38 +38,52 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   };
 
   return (
-    <>
-      <div className="bg-white rounded-lg grid grid-cols-12 items-center py-4 divide-x-1">
-        <div className="col-span-2 border-r-2">
-          <div className="flex justify-center">
-            <button
-              onClick={() => changeStatus(task.id)}
-              className="w-6 h-6 border-2 border-purple-600 rounded-full flex items-center justify-center cursor-pointer"
-            >
-              {task.isDone && (
-                <div className="w-4 h-4 bg-purple-600 rounded-full"></div>
-              )}
-            </button>
-          </div>
-        </div>
-        <div className="col-span-8 px-8">
-          <div className="text-base max-md:text-sm truncate">{task.title}</div>
-          <div className="flex gap-2 items-center">
-            <div
-              style={{ background: selectEnumCategory?.color }}
-              className={` w-2 h-2 rounded-full`}
-            ></div>
-            <div style={{ color: selectEnumCategory?.color }} className="text-sm max-md:text-xs italic">
-              {selectEnumCategory?.title}
+    <div className="bg-white shadow-lg rounded-lg p-4 mb-4">
+      <div className="flex items-center justify-between">
+        <p className="text-xs text-gray-500">
+          Creator : {task.isCreatorAdmin ? "Admin" : "User"}
+        </p>
+        <p className="text-xs text-gray-500 flex items-center gap-1">
+          Accessibility :{" "}
+          {isAdminUser || isAccessibility(task.userId) ? (
+            <img src="/Assets/checked.png" alt="" className="w-4 h-4" />
+          ) : (
+            <img src="/Assets/remove.png" alt="" className="w-4 h-4" />
+          )}{" "}
+        </p>
+        <p className="text-xs text-gray-500">{task.userEmail}</p>
+      </div>
+      <div className="w-full h-px bg-slate-500 my-2"></div>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <button
+            onClick={() => changeStatus(task.id)}
+            className="w-6 h-6 border-2 border-purple-600 rounded-full flex items-center justify-center cursor-pointer mr-4"
+          >
+            {task.isDone && (
+              <div className="w-4 h-4 bg-purple-600 rounded-full"></div>
+            )}
+          </button>
+          <div>
+            <h2 className="text-lg font-bold">{task.title}</h2>
+            <div className="flex items-center gap-2">
+              <div
+                style={{ background: selectEnumCategory?.color }}
+                className={` w-2 h-2 rounded-full`}
+              ></div>
+              <p className="text-sm text-gray-500">
+                {selectEnumCategory?.title}
+              </p>
             </div>
           </div>
         </div>
-        <div className="col-span-1 flex justify-center max-md:justify-start">
+        <div>
           <button
             onClick={() => {
               setIsConfirmModal(false);
               openModal();
             }}
+            className="mr-2"
           >
             <img
               className="object-cover w-4 h-4 "
@@ -71,8 +91,6 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
               alt="Edit"
             />
           </button>
-        </div>
-        <div className="col-span-1 flex justify-center max-md:justify-start">
           <button
             onClick={() => {
               setIsConfirmModal(true);
@@ -82,7 +100,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
             <img
               className="object-cover w-4 h-4 "
               src="/Assets/erase.svg"
-              alt="Edit"
+              alt="Delete"
             />
           </button>
         </div>
@@ -99,7 +117,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           <AddEditTaskForm id={task.id} closeModal={closeModal} />
         )}
       </CustomModal>
-    </>
+    </div>
   );
 };
 

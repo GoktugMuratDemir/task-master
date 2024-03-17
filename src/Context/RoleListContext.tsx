@@ -3,6 +3,7 @@ import { RoleListType, RoleProps } from "./RoleType";
 import { db } from "../Config/FireBase";
 import { collection, getDocs, query } from "firebase/firestore";
 import useAuth from "../Hooks/Auth/useAuth";
+import { toast } from "react-toastify";
 
 interface ChildrenProps {
   children: React.ReactNode;
@@ -16,6 +17,11 @@ export const RoleListContextProvider: React.FC<ChildrenProps> = ({
   const [roleList, setRoleList] = useState<RoleProps[]>([]);
 
   const authUser = useAuth();
+
+  const userInfo = {
+    userId: authUser?.uid || "",
+    userEmail: authUser?.email || "",
+  };
 
   const isAdminUser = roleList.some((role) => role.userId === authUser?.uid);
 
@@ -36,10 +42,27 @@ export const RoleListContextProvider: React.FC<ChildrenProps> = ({
     setRoleList(newRoleList);
   };
 
+  // ** Check Accessibility
+  const isAccessibility = (taskUserId: string) =>
+    isAdminUser || taskUserId === userInfo.userId;
+
+  // ** Check Accessibility Permission and Display Toastify Message
+  const isAccessibilityPermission = (taskUserId: string) => {
+    if (isAccessibility(taskUserId)) {
+      return true;
+    } else {
+      toast.error("You don't have permission to access this task!");
+      return false;
+    }
+  };
+
   return (
     <RoleListContext.Provider
       value={{
-        isAdminUser
+        isAdminUser,
+        userInfo,
+        isAccessibility,
+        isAccessibilityPermission,
       }}
     >
       {children}
