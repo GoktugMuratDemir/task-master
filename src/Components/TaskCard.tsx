@@ -39,11 +39,11 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-4 mb-4">
-      <div className="flex items-center justify-between">
-        <p className="text-xs text-gray-500">
+      <div className="grid grid-cols-3">
+        <p className="col-span-1 text-xs text-gray-500">
           Creator : {task.isCreatorAdmin ? "Admin" : "User"}
         </p>
-        <p className="text-xs text-gray-500 flex items-center gap-1">
+        <p className="col-span-1 text-xs text-gray-500 flex items-center gap-1 justify-center">
           Accessibility :{" "}
           {isAdminUser || isAccessibility(task.userId) ? (
             <img src="/Assets/checked.png" alt="" className="w-4 h-4" />
@@ -51,7 +51,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
             <img src="/Assets/remove.png" alt="" className="w-4 h-4" />
           )}{" "}
         </p>
-        <p className="text-xs text-gray-500">{task.userEmail}</p>
+        <p className="col-span-1 text-xs text-gray-500 text-end">{task.userEmail}</p>
       </div>
       <div className="w-full h-px bg-slate-500 my-2"></div>
       <div className="flex items-center justify-between">

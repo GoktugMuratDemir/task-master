@@ -44,13 +44,13 @@ const SideBarList: React.FC = () => {
   const [openCategories, setOpenCategories] = useState<string[]>([]);
   const navigate = useNavigate();
 
+
+
   const location = useLocation();
 
   const handleSubCategoryClick = (to: string) => {
     navigate(to);
   };
-
-  
 
   const toggleOpenCategory = (to: string) => {
     setOpenCategories((prevOpenCategories) => {
