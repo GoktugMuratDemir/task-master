@@ -1,9 +1,9 @@
 import React, { useState, createContext, useEffect } from "react";
+import { toast } from "react-toastify";
+import { collection, getDocs, query } from "firebase/firestore";
 import { RoleListType, RoleProps } from "./RoleType";
 import { db } from "../Config/FireBase";
-import { collection, getDocs, query } from "firebase/firestore";
 import useAuth from "../Hooks/Auth/useAuth";
-import { toast } from "react-toastify";
 
 interface ChildrenProps {
   children: React.ReactNode;
@@ -24,6 +24,7 @@ export const RoleListContextProvider: React.FC<ChildrenProps> = ({
   };
 
   const isAdminUser = roleList.some((role) => role.userId === authUser?.uid);
+
 
   // ** get taskList
   useEffect(() => {
